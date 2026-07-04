@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base typography and resets — matches the locked design system.
+   Body uses sans-serif, 16px, line-height 1.7 per spec. */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #F5F5F3;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  color: #111110;
+  font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Reusable pill section label — uppercase, hairline border, 11px tracked.
+   Used above section headings across the landing page. */
+.section-label {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  border: 1px solid #E8E8E6;
+  border-radius: 999px;
+  padding: 4px 12px;
+  color: #6B7A8D;
+}
+
+/* Two-tone headline base classes — first line muted, second line bold dark.
+   Components apply these directly rather than recreating the styles inline. */
+.headline-muted {
+  color: #AAAAAA;
+}
+
+.headline-strong {
+  color: #111110;
+  font-weight: 700;
+}
+
+/* Signature animation: blur-to-sharp scroll reveal. Sections start blurred
+   and slightly lowered, then sharpen into focus as they enter the viewport.
+   Applied to whole sections (not individual text nodes) per the performance
+   rule in the design spec. Driven by the useScrollReveal hook, which toggles
+   the .is-visible class via IntersectionObserver. */
+.scroll-reveal {
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, filter 0.7s ease-out, transform 0.7s ease-out;
+  will-change: opacity, filter, transform;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+/* Two-tone headline entrance — first line fades in, second line follows
+   ~200ms later. Applied on page load (not scroll-triggered). */
+.headline-enter-1 {
+  opacity: 0;
+  animation: headline-fade-in 0.6s ease-out 0.1s forwards;
+}
+
+.headline-enter-2 {
+  opacity: 0;
+  animation: headline-fade-in 0.6s ease-out 0.3s forwards;
+}
+
+@keyframes headline-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button hover: scale + slight darken, per spec. */
+.btn-hover {
+  transition: transform 0.2s ease, filter 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-hover:hover {
+  transform: scale(1.02);
+  filter: brightness(0.94);
+}
+
+/* Respect reduced-motion preferences: skip blur/scale/marquee motion and
+   show content immediately instead. */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+    transition: none;
+  }
+
+  .headline-enter-1,
+  .headline-enter-2 {
+    opacity: 1;
+    animation: none;
+  }
+
+  .btn-hover:hover {
+    transform: none;
+  }
+
+  .animate-marquee {
+    animation: none !important;
+  }
+}

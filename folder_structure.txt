@@ -1,0 +1,53 @@
+analysr/
+├── public/
+│   ├── icons/                  (PWA icons, added in Milestone 10)
+│   └── manifest.json           (added in Milestone 10)
+├── src/
+│   ├── assets/                 (static images, logo)
+│   ├── components/
+│   │   ├── landing/             → Navbar, HeroSection, etc.
+│   │   ├── auth/                → LoginForm, SignupForm, OAuthButton
+│   │   ├── dashboard/           → Sidebar, BottomNav, DashboardHeader
+│   │   ├── upload/               → UploadDropzone, FilePreview, validators
+│   │   ├── loading/              → AnalysisLoader, BlurRevealAnimation
+│   │   ├── results/              → ResultsTable, FindingsCard, etc.
+│   │   ├── history/              → HistoryList, HistoryCard
+│   │   ├── profile/              → ProfileSection, ConditionTagInput, etc.
+│   │   └── common/               → Disclaimer, ErrorBoundary, Button, Card
+│   ├── context/
+│   │   ├── AuthContext.jsx //DONE
+│   │   └── ProfileContext.jsx //DONE
+│   ├── hooks/
+│   │   ├── useAuth.js
+│   │   ├── useProfile.js
+│   │   └── useDebounce.js //DONE
+│   ├── services/
+│   │   ├── supabaseClient.js //DONE
+│   │   ├── aiService.js          → Gemini calls (via serverless route)
+│   │   └── pdfService.js
+│   ├── pages/
+│   │   ├── LandingPage.jsx
+│   │   ├── LoginPage.jsx
+│   │   ├── SignupPage.jsx
+│   │   ├── DashboardPage.jsx
+│   │   ├── UploadPage.jsx
+│   │   ├── AnalysisLoadingPage.jsx
+│   │   ├── ResultsPage.jsx
+│   │   ├── HistoryPage.jsx
+│   │   └── ProfilePage.jsx
+│   ├── routes/
+│   │   └── ProtectedRoute.jsx //DONE
+│   ├── styles/
+│   │   └── tokens.css  //DONE    → design system CSS variables
+│   ├── utils/
+│   │   └── validators.js
+│   ├── App.jsx //DONE
+│   └── main.jsx //DONE
+├── api/                          → Vercel serverless functions
+│   └── analyse.js                → Gemini API key lives only here
+├── .env.local                    → API keys (gitignored)
+├── .gitignore //DONE
+├── index.html //DONE
+├── vite.config.js //DONE
+├── package.json //DONE
+└── tailwind.config.js //DONE

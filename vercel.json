@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/((?!api/|@vite|@react-refresh|@id|@fs|src/)(?!.*\\.[a-zA-Z0-9]+$).*)", "destination": "/index.html" }
+  ],
+  "functions": {
+    "api/analyse.js": {
+      "maxDuration": 60
+    }
+  }
+}
